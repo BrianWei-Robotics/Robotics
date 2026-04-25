@@ -1,0 +1,179 @@
+:root {
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    
+    --success: #22c55e;
+    --warning: #eab308;
+    --danger: #ef4444;
+    --action: #3b82f6;
+    --action-hover: #2563eb;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 { margin: 0; font-size: 1.5rem; }
+.subtitle { margin: 0.25rem 0 0 0; color: var(--text-secondary); font-size: 0.9rem; }
+
+.home-btn, .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.home-btn:hover, .action-btn:hover { background-color: var(--border-color); }
+
+main {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h2 { margin: 0; font-size: 1.25rem; }
+
+/* Grid and Cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.battery-card {
+    background-color: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+#next-up-container .battery-card {
+    max-width: 400px;
+    border: 2px solid var(--success);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+}
+
+.battery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.battery-header h3 { margin: 0; font-size: 1.1rem; }
+.manual-badge { font-size: 0.75rem; background: var(--action); padding: 0.2rem 0.5rem; border-radius: 4px; margin-left: 0.5rem;}
+
+.battery-graphic {
+    width: 100%;
+    height: 35px;
+    border: 3px solid var(--border-color);
+    border-radius: 6px;
+    position: relative;
+    margin-bottom: 1.5rem;
+    background-color: #000;
+    box-sizing: border-box;
+}
+
+.battery-graphic::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 14px;
+    background: var(--border-color);
+    border-radius: 0 3px 3px 0;
+}
+
+.battery-level { height: 100%; border-radius: 3px; transition: width 1s ease-in-out; }
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.stat-item { background-color: rgba(0,0,0,0.2); padding: 0.75rem; border-radius: 6px; }
+.stat-label { color: var(--text-secondary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+.stat-value { font-size: 1.05rem; font-weight: 600; }
+.stat-unit { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Buttons & Controls */
+.card-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.set-next-btn {
+    background-color: var(--action);
+    color: white;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.set-next-btn:hover { background-color: var(--action-hover); }
+.set-next-btn:disabled { background-color: var(--border-color); cursor: not-allowed; color: var(--text-secondary); }
+
+.edit-controls {
+    display: none; /* Hidden by default */
+    gap: 0.5rem;
+}
+
+/* Edit Mode Active */
+.editing-mode .edit-controls { display: flex; }
+.editing-mode .set-next-btn { display: none; }
+
+.move-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.move-btn:hover { background: rgba(255,255,255,0.1); }
+.move-btn:disabled { opacity: 0.3; cursor: not-allowed; }
