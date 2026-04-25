@@ -20,6 +20,8 @@ const roleOptions = document.querySelectorAll('.role-option');
 const roleDisplay = document.getElementById('current-role-display');
 const whiteboardLink = document.getElementById('whiteboard-link');
 const batteryLink = document.getElementById('battery-link');
+const pitChecklistLink = document.getElementById('pit_checklist-link');
+
 roleOptions.forEach(option => {
     option.addEventListener('click', (e) => {
         e.preventDefault(); 
@@ -30,8 +32,10 @@ roleOptions.forEach(option => {
         // Logic: Who gets to see the whiteboard?
         if (selectedRole === 'Pit Crew' || selectedRole === 'Drive Team') {
             whiteboardLink.style.display = 'block'; // Show it
+            pitChecklistLink.style.display = 'block'; // Show it
         } else {
             whiteboardLink.style.display = 'none';  // Hide it
+            pitChecklistLink.style.display = 'none';  // Hide it
         }
         // Logic: Who gets to see the battery status?
         if (selectedRole === 'Pit Crew') {
