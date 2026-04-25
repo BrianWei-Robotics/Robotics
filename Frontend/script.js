@@ -19,7 +19,7 @@ roleBtn.addEventListener('click', () => {
 const roleOptions = document.querySelectorAll('.role-option');
 const roleDisplay = document.getElementById('current-role-display');
 const whiteboardLink = document.getElementById('whiteboard-link');
-
+const batteryLink = document.getElementById('battery-link');
 roleOptions.forEach(option => {
     option.addEventListener('click', (e) => {
         e.preventDefault(); 
@@ -33,7 +33,13 @@ roleOptions.forEach(option => {
         } else {
             whiteboardLink.style.display = 'none';  // Hide it
         }
-        
+        // Logic: Who gets to see the battery status?
+        if (selectedRole === 'Pit Crew') {
+            batteryLink.style.display = 'block'; // Show it
+        } else {
+            batteryLink.style.display = 'none';  // Hide it
+        }
+
         roleMenu.classList.remove('show');
         roleBtn.classList.remove('active');
     });
