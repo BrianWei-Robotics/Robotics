@@ -28,7 +28,7 @@ resizeCanvas(); // Initial call
 // --- Event Listeners for UI ---
 
 homeBtn.addEventListener('click', () => {
-  window.location.href = '/'; // Set to your actual home URL
+  window.location.href = '/Frontend/index.html'; 
 });
 
 toolBtns.forEach(btn => {

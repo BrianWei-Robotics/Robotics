@@ -1,15 +1,15 @@
 :root {
-    --bg-color: #0f172a;
-    --surface-color: #1e293b;
-    --text-primary: #f8fafc;
+    --bg-color: #0a090e;
+    --surface-color: #13111a;
+    --text-primary: #e2e8f0;
     --text-secondary: #94a3b8;
-    --border-color: #334155;
+    --border-color: #2a2736;
     
-    --success: #22c55e;
+    --success: #2ea043;
     --warning: #eab308;
     --danger: #ef4444;
-    --action: #3b82f6;
-    --action-hover: #2563eb;
+    --action: #7a28cb; /* Purple action buttons */
+    --action-hover: #5d1d9c;
 }
 
 body {
@@ -28,7 +28,7 @@ header {
     border-bottom: 1px solid var(--border-color);
 }
 
-header h1 { margin: 0; font-size: 1.5rem; }
+header h1 { margin: 0; font-size: 1.5rem; color: #ffffff; }
 .subtitle { margin: 0.25rem 0 0 0; color: var(--text-secondary); font-size: 0.9rem; }
 
 .home-btn, .action-btn {
@@ -36,16 +36,20 @@ header h1 { margin: 0; font-size: 1.5rem; }
     align-items: center;
     gap: 0.5rem;
     background-color: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--action);
     color: var(--text-primary);
     padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
 }
 
-.home-btn:hover, .action-btn:hover { background-color: var(--border-color); }
+.home-btn:hover, .action-btn:hover { 
+    background-color: var(--action); 
+    color: white;
+    box-shadow: 0 4px 15px rgba(122, 40, 203, 0.3);
+}
 
 main {
     padding: 2rem;
@@ -76,7 +80,7 @@ h2 { margin: 0; font-size: 1.25rem; }
     padding: 1.5rem;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
 }

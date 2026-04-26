@@ -1,11 +1,11 @@
 :root {
-  --primary-color: #0066b3;
-  --secondary-color: #ed1c24;
-  --bg-color: #1a1a24;
-  --panel-bg: #2b2b36;
-  --text-color: #ffffff;
-  --border-color: #444;
-  --hover-bg: #3d3d4b;
+  --primary-color: #2ea043;
+  --secondary-color: #7a28cb;
+  --bg-color: #0a090e;
+  --panel-bg: #13111a;
+  --text-color: #e2e8f0;
+  --border-color: #2a2736;
+  --hover-bg: #1f1c29;
 }
 
 * {
@@ -36,6 +36,7 @@ header {
 header h1 {
   font-size: 2.5rem;
   letter-spacing: 1px;
+  color: #ffffff;
 }
 
 header p {
@@ -51,6 +52,7 @@ header p {
   justify-content: space-between;
   align-items: center;
   border: 1px solid var(--border-color);
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
   border-bottom: none;
 }
 
@@ -81,7 +83,15 @@ header p {
 }
 
 .btn-home {
-  background-color: #555;
+  background-color: transparent;
+  color: var(--text-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-home:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  box-shadow: 0 4px 15px rgba(122, 40, 203, 0.3);
 }
 
 .btn-clear {
@@ -114,11 +124,10 @@ header p {
 
 .canvas-container {
   background-color: #222;
-  /* Creates a grid pattern to simulate an empty field */
-  background-image: 
-    linear-gradient(#333 1px, transparent 1px),
-    linear-gradient(90deg, #333 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: url('https://firstfrc.blob.core.windows.net/frc2026/Manual/HTML/2026GameManual_files/image035.png'); /* Replace with actual 2026 field image URL when released */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   border: 1px solid var(--border-color);
   border-radius: 0 0 12px 12px;
   overflow: hidden;
@@ -132,4 +141,8 @@ canvas {
   height: auto;
   /* This prevents the browser from doing weird touch behaviors on mobile */
   touch-action: none; 
+}
+
+#fieldCanvas {
+  background: rgba(255, 255, 255, 0.1); /* Slight overlay to keep field visible but allow drawing clarity */
 }

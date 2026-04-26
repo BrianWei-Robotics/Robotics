@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #0066b3; /* FIRST Blue */
-  --secondary-color: #ed1c24; /* FIRST Red */
-  --bg-color: #f4f7f6;
-  --card-bg: #ffffff;
-  --text-color: #333333;
-  --text-muted: #666666;
-  --border-color: #e0e0e0;
-  --success-color: #28a745;
+  --primary-color: #2ea043; /* GalacTech Green */
+  --secondary-color: #7a28cb; /* GalacTech Purple */
+  --bg-color: #0a090e; /* Deep space dark */
+  --card-bg: #13111a;
+  --text-color: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border-color: #2a2736;
+  --success-color: #2ea043;
 }
 
 * {
@@ -32,16 +32,18 @@ header {
   text-align: center;
   margin-bottom: 30px;
   padding: 20px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
+  background: var(--card-bg);
+  color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  border-bottom: 2px solid var(--secondary-color);
 }
 
 header h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
+  color: #ffffff;
 }
 
 header p {
@@ -69,14 +71,15 @@ header p {
 
 /* Home Button Styles */
 .btn-home {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
+  background-color: transparent;
+  color: var(--text-color);
+  border-color: var(--secondary-color);
 }
 
 .btn-home:hover {
-  background-color: #004d88;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: var(--secondary-color);
+  color: white;
+  box-shadow: 0 4px 15px rgba(122, 40, 203, 0.3);
 }
 
 /* Clear Button Styles */
@@ -95,12 +98,12 @@ header p {
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 25px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  border-top: 5px solid var(--primary-color);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border-top: 4px solid var(--secondary-color);
 }
 
 .category:nth-child(even) {
-  border-top: 5px solid var(--secondary-color);
+  border-top: 4px solid var(--primary-color);
 }
 
 .category h2 {
@@ -133,7 +136,7 @@ header p {
 }
 
 .checklist-item:hover {
-  background-color: #fafafa;
+  background-color: #1f242c;
 }
 
 .custom-checkbox {

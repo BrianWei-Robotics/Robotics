@@ -1,98 +1,172 @@
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+:root {
+    --primary-color: #2ea043;
+    --secondary-color: #7a28cb;
+    --bg-color: #0a090e;
+    --panel-bg: #13111a;
+    --text-color: #e2e8f0;
+    --border-color: #2a2736;
+    --hover-bg: #1f1c29;
 }
 
-body { 
-    font-family: sans-serif; 
-    background-color: #f4f4f9; 
-    display: flex; 
-    justify-content: center; 
-    padding: 20px; 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.app-container { 
-    background: white; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-    overflow: hidden; 
-    width: 100%; 
-    max-width: 900px; 
-    display: flex; 
-    flex-direction: column; 
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.toolbar { 
-    padding: 15px; 
-    background: #eeeeee; 
-    border-bottom: 1px solid #cccccc; 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 20px; 
-    align-items: center; 
-    justify-content: space-between; 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    background-color: var(--bg-color);
 }
 
-.tool-group { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
+.toolbar {
+    background-color: var(--panel-bg);
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+    border-bottom: none;
+    gap: 15px;
 }
 
-button { 
-    padding: 8px 12px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    background: #ffffff; 
-    border: 1px solid #cccccc; 
-    transition: all 0.2s ease; 
+.tool-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-button.active { 
-    background: #007AFF; 
-    color: white; 
-    border-color: #007AFF; 
+.tool-btn, .action-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
-.colors { 
-    display: flex; 
-    gap: 8px; 
+.tool-btn:hover, .action-btn:hover {
+    background-color: var(--hover-bg);
 }
 
-.color-swatch { 
-    width: 30px; 
-    height: 30px; 
-    border-radius: 50%; 
-    cursor: pointer; 
-    border: 2px solid transparent; 
-    transition: transform 0.2s ease; 
+.tool-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(46, 160, 67, 0.3);
 }
 
-.color-swatch.active { 
-    border-color: #333333; 
-    transform: scale(1.15); 
+/* Target the home button specifically */
+#btn-home {
+    border-color: var(--secondary-color);
 }
 
-.action-btn { 
-    background: #FF3B30; 
-    color: white; 
-    border-color: #FF3B30; 
+#btn-home:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(122, 40, 203, 0.3);
 }
 
-.action-btn:hover {
-    background: #d63026;
+/* Target the clear button specifically */
+#btn-clear {
+    border-color: #ef4444;
+    color: #ef4444;
 }
 
-.canvas-container { 
-    position: relative; 
-    width: 100%; 
-    height: 600px; 
-    cursor: crosshair; 
+#btn-clear:hover {
+    background-color: #ef4444;
+    color: white;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
 }
 
-canvas { 
-    width: 100%; 
-    height: 100%; 
-    display: block; 
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+
+.color-swatch.active {
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 10px rgba(255,255,255,0.7);
+}
+
+.canvas-container {
+    flex-grow: 1;
+    background-color: #ffffff; /* Actual white drawing surface */
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+/* Custom Range Slider */
+input[type=range] {
+    -webkit-appearance: none;
+    background: transparent;
+    width: 100px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -5px;
+    box-shadow: 0 0 8px rgba(46, 160, 67, 0.5);
 }

@@ -23,25 +23,40 @@ const batteryLink = document.getElementById('battery-link');
 const pitChecklistLink = document.getElementById('pit_checklist-link');
 const autonDrawLink = document.getElementById('auton_draw-link');
 
+function applyRole(selectedRole) {
+    if (!selectedRole) return;
+    
+    roleDisplay.textContent = selectedRole;
+    
+    // Logic: Who gets to see the whiteboard?
+    if (selectedRole === 'Pit Crew' || selectedRole === 'Drive Team') {
+        whiteboardLink.style.display = 'block'; // Show it
+        pitChecklistLink.style.display = 'block'; // Show it
+        autonDrawLink.style.display = 'block'; // Show it
+        batteryLink.style.display = 'block'; // Show it
+    } else {
+        whiteboardLink.style.display = 'none';  // Hide it
+        pitChecklistLink.style.display = 'none';  // Hide it
+        autonDrawLink.style.display = 'none';  // Hide it
+        batteryLink.style.display = 'none';  // Hide it
+    }
+}
+
+// Load saved role on startup
+const savedRole = localStorage.getItem('frc-role');
+if (savedRole) {
+    applyRole(savedRole);
+}
+
 roleOptions.forEach(option => {
     option.addEventListener('click', (e) => {
         e.preventDefault(); 
         
         const selectedRole = e.target.getAttribute('data-role');
-        roleDisplay.textContent = selectedRole;
         
-        // Logic: Who gets to see the whiteboard?
-        if (selectedRole === 'Pit Crew' || selectedRole === 'Drive Team') {
-            whiteboardLink.style.display = 'block'; // Show it
-            pitChecklistLink.style.display = 'block'; // Show it
-            autonDrawLink.style.display = 'block'; // Show it
-            batteryLink.style.display = 'block'; // Show it
-        } else {
-            whiteboardLink.style.display = 'none';  // Hide it
-            pitChecklistLink.style.display = 'none';  // Hide it
-            autonDrawLink.style.display = 'none';  // Hide it
-            batteryLink.style.display = 'none';  // Hide it
-        }
+        // Save the role to local storage and apply it
+        localStorage.setItem('frc-role', selectedRole);
+        applyRole(selectedRole);
 
         roleMenu.classList.remove('show');
         roleBtn.classList.remove('active');
