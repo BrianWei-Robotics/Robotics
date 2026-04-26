@@ -117,13 +117,6 @@ function renderChecklist() {
   updateCategoryProgress();
 }
 
-// Event Listener for the Home Button
-homeBtn.addEventListener('click', () => {
-  // If you have a specific home page, put the URL here. 
-  // Examples: 'index.html', '/', 'https://yourteamwebsite.com'
-  window.location.href = '/Frontend/Index.html'; 
-});
-
 // Event Listener for the Clear All Button
 clearBtn.addEventListener('click', () => {
   if(confirm("Are you sure you want to clear all checkboxes?")) {

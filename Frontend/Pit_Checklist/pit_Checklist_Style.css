@@ -189,3 +189,11 @@ header p {
     font-size: 1.3rem;
   }
 }
+
+#homeBtn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
