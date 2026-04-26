@@ -22,6 +22,7 @@ const whiteboardLink = document.getElementById('whiteboard-link');
 const batteryLink = document.getElementById('battery-link');
 const pitChecklistLink = document.getElementById('pit_checklist-link');
 const autonDrawLink = document.getElementById('auton_draw-link');
+const strategyLink = document.getElementById('strategy-link');
 
 function applyRole(selectedRole) {
     if (!selectedRole) return;
@@ -34,11 +35,13 @@ function applyRole(selectedRole) {
         pitChecklistLink.style.display = 'block'; // Show it
         autonDrawLink.style.display = 'block'; // Show it
         batteryLink.style.display = 'block'; // Show it
+        strategyLink.style.display = 'block'; // Show it
     } else {
         whiteboardLink.style.display = 'none';  // Hide it
         pitChecklistLink.style.display = 'none';  // Hide it
         autonDrawLink.style.display = 'none';  // Hide it
         batteryLink.style.display = 'none';  // Hide it
+        strategyLink.style.display = 'none';  // Hide it
     }
 }
 
