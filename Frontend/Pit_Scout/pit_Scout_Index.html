@@ -14,24 +14,14 @@
             </div>
             
             <ul class="nav-links">
-                <li><a href="#">Dashboard Home</a></li>
+                <li><a href="#" id="nav-home">Dashboard Home</a></li>
+                
+                <li id="data-link" style="display: none;">
+                    <a href="#" id="nav-data">Data Entries</a>
+                </li>
+
                 <li id="whiteboard-link" style="display: none;">
-                    <a href="Drawing/drawing_Index.html">Whiteboard Tool</a>
-                </li> 
-                <li id="battery-link" style="display: none;">
-                    <a href="Battery/battery_Index.html">Battery Status</a>
-                </li> 
-                <li id="pit_checklist-link" style="display: none;">
-                    <a href="Pit_Checklist/pit_Checklist_Index.html">Pit Checklist</a>
-                </li> 
-                <li id="auton_draw-link" style="display: none;">
-                    <a href="Auton_Draw/auton_Draw_Index.html">Autonomous Path Planner</a>
-                </li> 
-                <li id="strategy-link" style="display: none;">
-                    <a href="Strategy/strategy_Index.html">Strategy Tool</a>
-                </li> 
-                <li id="pit_scout-link" style="display: none;">
-                    <a href="Pit_Scout/pit_Scout_Index.html">Pit Scouting</a>
+                    <a href="Frontend/Drawing App/drawing_App_Index.html">Whiteboard Tool</a>
                 </li> 
             </ul>
         </div>
@@ -61,8 +51,35 @@
         </header>
         
         <div class="content-area">
-            <h1>Welcome to the Dashboard</h1>
-            <p>Use the sidebar to select your team role to unlock specific tools.</p>
+            
+            <div id="view-home" class="app-view active">
+                <h1>Welcome to the Dashboard</h1>
+                <p>Use the sidebar to select your team role to unlock specific tools and data.</p>
+            </div>
+
+            <div id="view-data" class="app-view">
+                <div class="page-header-row">
+                    <h1>Scouting Data</h1>
+                    <button id="btn-clear-data" class="danger-btn">Clear All Data</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th>Match #</th>
+                                <th>Team</th>
+                                <th>Auto Pts</th>
+                                <th>Teleop Pts</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </main>
 

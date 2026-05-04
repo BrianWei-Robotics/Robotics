@@ -1,0 +1,75 @@
+/* --- View Management (Single Page App Logic) --- */
+.app-view {
+    display: none; /* Hide all views by default */
+}
+
+.app-view.active {
+    display: block; /* Only show the active view */
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Data Entries Page Styles --- */
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.danger-btn {
+    background: #da3633;
+    color: white;
+    border: 1px solid rgba(240, 246, 252, 0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.danger-btn:hover {
+    background: #b32624;
+    transform: scale(1.02);
+}
+
+.table-container {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    overflow: hidden; /* Keeps the rounded corners on the table */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #30363d;
+}
+
+th {
+    background: #0d1117;
+    color: #2ea043;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+tr:hover {
+    background: #1f242c;
+}
+
+.empty-state {
+    text-align: center;
+    color: #8b949e;
+    padding: 40px !important;
+    font-style: italic;
+}

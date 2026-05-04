@@ -23,6 +23,7 @@ const batteryLink = document.getElementById('battery-link');
 const pitChecklistLink = document.getElementById('pit_checklist-link');
 const autonDrawLink = document.getElementById('auton_draw-link');
 const strategyLink = document.getElementById('strategy-link');
+const pitScoutLink = document.getElementById('pit_scout-link');
 
 function applyRole(selectedRole) {
     if (!selectedRole) return;
@@ -42,6 +43,11 @@ function applyRole(selectedRole) {
         autonDrawLink.style.display = 'none';  // Hide it
         batteryLink.style.display = 'none';  // Hide it
         strategyLink.style.display = 'none';  // Hide it
+    }
+    if (selectedRole === 'Pit Scout' || selectedRole === 'Lead Scout') {
+        pitScoutLink.style.display = 'block'; // Show it
+    } else {
+        pitScoutLink.style.display = 'none';  // Hide it
     }
 }
 
