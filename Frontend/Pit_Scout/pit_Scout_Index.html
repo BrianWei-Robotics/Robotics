@@ -3,85 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team 4926 Dashboard</title>
+    <title>GalacTech 4926 | Pit Scouting</title>
     <link rel="stylesheet" href="pit_Scout_Style.css">
 </head>
 <body>
-    <nav id="sidebar" class="sidebar">
-        <div>
-            <div class="sidebar-header">
-                <h2>Team Portal</h2>
+
+    <header>
+        <h1><span class="highlight">Galac</span>Tech 4926</h1>
+        <p class="subtitle">Pit Scouting Application</p>
+    </header>
+
+    <div class="stats-banner" id="statsBanner">
+        Teams Scouted: 0
+    </div>
+
+    <form id="scoutForm">
+        <div class="card">
+            <h2>Team Information</h2>
+            <div class="form-group">
+                <label for="teamNumber">Team Number *</label>
+                <input type="number" id="teamNumber" required placeholder="e.g., 254">
+            </div>
+            <div class="form-group">
+                <label for="teamName">Team Name</label>
+                <input type="text" id="teamName" placeholder="e.g., The Cheesy Poofs">
+            </div>
+            <div class="form-group">
+                <label for="scoutName">Scout Name *</label>
+                <input type="text" id="scoutName" required placeholder="Enter your name">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Robot Specifications</h2>
+            <div class="form-group">
+                <label for="drivetrain">Drivetrain Type</label>
+                <select id="drivetrain">
+                    <option value="Swerve">Swerve</option>
+                    <option value="Tank/West Coast">Tank / West Coast</option>
+                    <option value="Mecanum">Mecanum</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="weight">Robot Weight (lbs)</label>
+                <input type="number" id="weight" step="0.1" placeholder="e.g., 120">
+            </div>
+            <div class="form-group">
+                <label for="dimensions">Dimensions (W x L in inches)</label>
+                <input type="text" id="dimensions" placeholder="e.g., 28x28">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Capabilities</h2>
+            <div class="checkbox-group">
+                <input type="checkbox" id="hasAuto">
+                <label for="hasAuto">Has Autonomous Routine?</label>
+            </div>
+            <div class="form-group">
+                <label for="autoNotes">Auto Path Notes</label>
+                <input type="text" id="autoNotes" placeholder="e.g., 3 piece + balance">
             </div>
             
-            <ul class="nav-links">
-                <li><a href="#" id="nav-home">Dashboard Home</a></li>
-                
-                <li id="data-link" style="display: none;">
-                    <a href="#" id="nav-data">Data Entries</a>
-                </li>
-
-                <li id="whiteboard-link" style="display: none;">
-                    <a href="Frontend/Drawing App/drawing_App_Index.html">Whiteboard Tool</a>
-                </li> 
-            </ul>
-        </div>
-
-        <div class="sidebar-bottom">
-            <div class="dropdown-container">
-                <button class="dropdown-btn" id="role-btn">
-                    Select Role <span class="arrow">&#9660;</span>
-                </button>
-                <ul class="dropdown-menu" id="role-menu">
-                    <li><a href="#" class="role-option" data-role="Pit Scout">Pit Scout</a></li>
-                    <li><a href="#" class="role-option" data-role="Scout">Scout</a></li>
-                    <li><a href="#" class="role-option" data-role="Lead Scout">Lead Scout</a></li>
-                    <li><a href="#" class="role-option" data-role="Pit Crew">Pit Crew</a></li>
-                    <li><a href="#" class="role-option" data-role="Drive Team">Drive Team</a></li>
-                </ul>
+            <div class="checkbox-group">
+                <input type="checkbox" id="canClimb">
+                <label for="canClimb">Can Climb/Hang?</label>
+            </div>
+            <div class="form-group">
+                <label for="scoringPref">Preferred Scoring Area</label>
+                <select id="scoringPref">
+                    <option value="Any">Any</option>
+                    <option value="High">High Level</option>
+                    <option value="Low">Low Level</option>
+                    <option value="Defense">Defense/Feeder</option>
+                </select>
             </div>
         </div>
-    </nav>
 
-    <main id="main-content" class="main-content">
-        <header>
-            <button id="toggle-btn" class="toggle-btn">&#9776; Menu</button>
-            <div class="user-status">
-                Current Role: <span id="current-role-display" class="highlight">None Selected</span>
+        <div class="card">
+            <h2>System Data & Notes</h2>
+            <div class="form-group">
+                <label for="notes">General Impressions / Weaknesses / Strengths</label>
+                <textarea id="notes" placeholder="e.g., Very fast cycle times, but fragile intake..."></textarea>
             </div>
-        </header>
-        
-        <div class="content-area">
-            
-            <div id="view-home" class="app-view active">
-                <h1>Welcome to the Dashboard</h1>
-                <p>Use the sidebar to select your team role to unlock specific tools and data.</p>
-            </div>
-
-            <div id="view-data" class="app-view">
-                <div class="page-header-row">
-                    <h1>Scouting Data</h1>
-                    <button id="btn-clear-data" class="danger-btn">Clear All Data</button>
-                </div>
-                
-                <div class="table-container">
-                    <table id="data-table">
-                        <thead>
-                            <tr>
-                                <th>Match #</th>
-                                <th>Team</th>
-                                <th>Auto Pts</th>
-                                <th>Teleop Pts</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody id="data-body">
-                            </tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
-    </main>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-save">Save Data to Local Node</button>
+            <button type="button" id="exportBtn" class="btn-export">Export CSV Telemetry</button>
+        </div>
+    </form>
 
     <script src="pit_Scout_Script.js"></script>
 </body>

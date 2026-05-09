@@ -1,75 +1,207 @@
-/* --- View Management (Single Page App Logic) --- */
-.app-view {
-    display: none; /* Hide all views by default */
+:root {
+    --bg-color: #0d0e15; /* Deep space black */
+    --card-bg: #161824; /* Dark grey panels */
+    --primary: #00e5ff; /* Neon tech blue */
+    --primary-hover: #00b3cc;
+    --secondary: #ff0055; /* Alert red */
+    --text-color: #e0e2ea; /* Off-white text */
+    --text-muted: #8b92a5;
+    --input-bg: #1f2233;
+    --input-border: #2d314a;
 }
 
-.app-view.active {
-    display: block; /* Only show the active view */
-    animation: fadeIn 0.3s ease;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* --- Data Entries Page Styles --- */
-.page-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 10px;
 }
 
-.danger-btn {
-    background: #da3633;
-    color: white;
-    border: 1px solid rgba(240, 246, 252, 0.1);
-    padding: 10px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s, transform 0.1s;
-}
-
-.danger-btn:hover {
-    background: #b32624;
-    transform: scale(1.02);
-}
-
-.table-container {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    overflow: hidden; /* Keeps the rounded corners on the table */
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-th, td {
-    padding: 14px 20px;
-    border-bottom: 1px solid #30363d;
-}
-
-th {
-    background: #0d1117;
-    color: #2ea043;
+header h1 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-size: 0.85rem;
+}
+
+.highlight {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.stats-banner {
+    background: var(--card-bg);
+    color: var(--primary);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--input-border);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sci-fi top border accent */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-tr:hover {
-    background: #1f242c;
+.form-group {
+    margin-bottom: 18px;
 }
 
-.empty-state {
-    text-align: center;
-    color: #8b949e;
-    padding: 40px !important;
-    font-style: italic;
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    background: var(--input-bg);
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.checkbox-group input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-save {
+    background-color: var(--primary);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+.btn-save:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.btn-export {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--text-muted);
+}
+
+.btn-export:hover {
+    background-color: var(--input-border);
+    color: #fff;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .btn-group {
+        flex-direction: column;
+    }
 }

@@ -1,117 +1,96 @@
-// --- Simulated Database ---
-let mockDatabase = [
-    { match: 12, team: 4926, auto: 15, teleop: 45, notes: "Fast cycles, solid climb." },
-    { match: 14, team: 1024, auto: 5, teleop: 20, notes: "Played heavy defense." },
-    { match: 18, team: 4926, auto: 18, teleop: 50, notes: "Flawless autonomous run." }
-];
+// Array to hold our scouting data
+let database = [];
 
-// --- 1. UI Elements & Toggle Logic ---
-const toggleBtn = document.getElementById('toggle-btn');
-const sidebar = document.getElementById('sidebar');
+// Load existing data from localStorage on startup
+window.onload = function() {
+    const savedData = localStorage.getItem('galactechScoutData');
+    if (savedData) {
+        database = JSON.parse(savedData);
+        updateStats();
+    }
+};
 
-toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
+// Handle form submission
+document.getElementById('scoutForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+
+    // Create an object with the current form data
+    const teamData = {
+        timestamp: new Date().toLocaleString(),
+        teamNumber: document.getElementById('teamNumber').value,
+        teamName: document.getElementById('teamName').value,
+        scoutName: document.getElementById('scoutName').value,
+        drivetrain: document.getElementById('drivetrain').value,
+        weight: document.getElementById('weight').value,
+        dimensions: document.getElementById('dimensions').value,
+        hasAuto: document.getElementById('hasAuto').checked,
+        autoNotes: document.getElementById('autoNotes').value,
+        canClimb: document.getElementById('canClimb').checked,
+        scoringPref: document.getElementById('scoringPref').value,
+        notes: document.getElementById('notes').value.replace(/(\r\n|\n|\r)/gm, " ") // Remove line breaks for CSV
+    };
+
+    // Check if team already exists, update if true, otherwise push new
+    const existingIndex = database.findIndex(t => t.teamNumber === teamData.teamNumber);
+    if (existingIndex >= 0) {
+        if(confirm(`Team ${teamData.teamNumber} already exists in the database. Overwrite?`)) {
+            database[existingIndex] = teamData;
+        } else {
+            return; // Stop if user cancels overwrite
+        }
+    } else {
+        database.push(teamData);
+    }
+
+    // Save to localStorage under a GalacTech specific key
+    localStorage.setItem('galactechScoutData', JSON.stringify(database));
+    
+    // Update UI and reset form
+    updateStats();
+    document.getElementById('scoutForm').reset();
+    alert(`Data for Team ${teamData.teamNumber} saved successfully!`);
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-const roleBtn = document.getElementById('role-btn');
-const roleMenu = document.getElementById('role-menu');
-
-roleBtn.addEventListener('click', () => {
-    roleMenu.classList.toggle('show');
-    roleBtn.classList.toggle('active');
-});
-
-// --- 2. Navigation / Page Switching Logic ---
-const navHome = document.getElementById('nav-home');
-const navData = document.getElementById('nav-data');
-const viewHome = document.getElementById('view-home');
-const viewData = document.getElementById('view-data');
-
-function switchView(viewToShow) {
-    // Hide all views
-    document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active'));
-    // Show the requested view
-    viewToShow.classList.add('active');
+// Update the counter banner
+function updateStats() {
+    document.getElementById('statsBanner').innerText = `Teams Scouted: ${database.length}`;
 }
 
-navHome.addEventListener('click', (e) => {
-    e.preventDefault();
-    switchView(viewHome);
-});
-
-navData.addEventListener('click', (e) => {
-    e.preventDefault();
-    switchView(viewData);
-    renderTable(); // Re-draw data every time we open the page
-});
-
-
-// --- 3. Role Permissions Logic ---
-const roleOptions = document.querySelectorAll('.role-option');
-const roleDisplay = document.getElementById('current-role-display');
-const whiteboardLink = document.getElementById('whiteboard-link');
-const dataLink = document.getElementById('data-link');
-
-roleOptions.forEach(option => {
-    option.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        const selectedRole = e.target.getAttribute('data-role');
-        roleDisplay.textContent = selectedRole;
-        
-        // Whiteboard Permissions
-        if (selectedRole === 'Pit Crew' || selectedRole === 'Drive Team') {
-            whiteboardLink.style.display = 'block'; 
-        } else {
-            whiteboardLink.style.display = 'none';  
-        }
-
-        // Data Entries Permissions
-        if (selectedRole === 'Lead Scout' || selectedRole === 'Scout' || selectedRole === 'Drive Team') {
-            dataLink.style.display = 'block';
-        } else {
-            dataLink.style.display = 'none';
-            switchView(viewHome); // Kick them back to home if they lose access
-        }
-        
-        roleMenu.classList.remove('show');
-        roleBtn.classList.remove('active');
-    });
-});
-
-// --- 4. Data Rendering & Deleting Logic ---
-const dataBody = document.getElementById('data-body');
-const btnClearData = document.getElementById('btn-clear-data');
-
-function renderTable() {
-    dataBody.innerHTML = ''; // Clear the current HTML table
-
-    // If database is empty, show a message
-    if (mockDatabase.length === 0) {
-        dataBody.innerHTML = '<tr><td colspan="5" class="empty-state">No scouting data found in the system.</td></tr>';
+// Export data to CSV and bind to export button
+document.getElementById('exportBtn').addEventListener('click', function() {
+    if (database.length === 0) {
+        alert("No telemetry data available to export.");
         return;
     }
 
-    // Loop through the database and build HTML rows
-    mockDatabase.forEach(entry => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${entry.match}</td>
-            <td class="highlight">${entry.team}</td>
-            <td>${entry.auto}</td>
-            <td>${entry.teleop}</td>
-            <td>${entry.notes}</td>
-        `;
-        dataBody.appendChild(row);
-    });
-}
-
-// Clear Data Button Event
-btnClearData.addEventListener('click', () => {
-    // Standard browser confirmation popup
-    const isSure = confirm("Are you sure you want to delete all data? This cannot be undone.");
+    // Get headers from the first object
+    const headers = Object.keys(database[0]);
     
-    if (isSure) {
-        mockDatabase = []; // Empty the simulated database
-        renderTable();     // Update the screen immediately
+    // Map the data to CSV format
+    const csvRows = [];
+    csvRows.push(headers.join(',')); // Add headers row
+
+    for (const row of database) {
+        const values = headers.map(header => {
+            const escaped = ('' + row[header]).replace(/"/g, '\\"'); // escape quotes
+            return `"${escaped}"`; // wrap in quotes to handle commas in text
+        });
+        csvRows.push(values.join(','));
     }
+
+    const csvString = csvRows.join('\n');
+    
+    // Create a downloadable link
+    const blob = new Blob([csvString], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', `GalacTech_PitScoutData_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 });
