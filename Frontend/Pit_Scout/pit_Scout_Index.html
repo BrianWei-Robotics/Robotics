@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GalacTech 4926 | Pit Scouting</title>
+    <a href="../index.html" class="home-button">🏠 Home</a>
+    <title>GalacTech 4926 | Offline-First Scouting</title>
     <link rel="stylesheet" href="pit_Scout_Style.css">
 </head>
 <body>
 
     <header>
         <h1><span class="highlight">Galac</span>Tech 4926</h1>
-        <p class="subtitle">Pit Scouting Application</p>
+        <p class="subtitle">Telemetry Sync Node</p>
     </header>
 
+    <!-- New Network Status Banner -->
+    <div id="networkStatus" class="status-banner offline">
+        📡 Initializing Node...
+    </div>
+
     <div class="stats-banner" id="statsBanner">
-        Teams Scouted: 0
+        Cloud Database: -- | Local Stash: --
     </div>
 
     <form id="scoutForm">
+        <!-- Team Info Section -->
         <div class="card">
             <h2>Team Information</h2>
             <div class="form-group">
@@ -34,6 +41,7 @@
             </div>
         </div>
 
+        <!-- Robot Specs Section -->
         <div class="card">
             <h2>Robot Specifications</h2>
             <div class="form-group">
@@ -55,6 +63,7 @@
             </div>
         </div>
 
+        <!-- Capabilities Section -->
         <div class="card">
             <h2>Capabilities</h2>
             <div class="checkbox-group">
@@ -81,6 +90,7 @@
             </div>
         </div>
 
+        <!-- Notes Section -->
         <div class="card">
             <h2>System Data & Notes</h2>
             <div class="form-group">
@@ -90,11 +100,10 @@
         </div>
 
         <div class="btn-group">
-            <button type="submit" class="btn-save">Save Data to Local Node</button>
-            <button type="button" id="exportBtn" class="btn-export">Export CSV Telemetry</button>
+            <button type="submit" class="btn-save">Log Telemetry</button>
         </div>
     </form>
 
-    <script src="pit_Scout_Script.js"></script>
+    <script type="module" src="pit_Scout_Script.js"></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GalacTech 4926 | Lead Scout Command</title>
+    <link rel="stylesheet" href="strategy_Dashboard_Style.css">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="home-button">🏠 Home</a>
+        <h1><span class="highlight">Galac</span>Tech Command</h1>
+        <p class="subtitle">Global Telemetry Dashboard</p>
+    </header>
+
+    <div class="control-panel">
+        <div class="stats-banner" id="statsBanner">
+            Database Link Established... Awaiting Telemetry
+        </div>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search Team # or Name...">
+            <button type="button" id="exportBtn" class="btn-export">Export CSV</button>
+            <button type="button" id="viewLogsBtn" class="btn-logs">View Action Logs</button>
+        </div>
+    </div>
+
+    <!-- Main Data Table -->
+    <div class="table-container">
+        <table id="scoutTable">
+            <thead>
+                <tr>
+                    <th>Team #</th>
+                    <th>Name</th>
+                    <th>Drivetrain</th>
+                    <th>Auto?</th>
+                    <th>Climb?</th>
+                    <th>Scout</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Data injected by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for viewing/editing full team details -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div id="modalData">
+                <!-- Detailed data/edit form injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Action History -->
+    <div id="logsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeLogsModal">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="margin: 0; color: #ffc107;">System Action Log</h2>
+                <button id="clearAllLogsBtn" class="btn-delete" style="padding: 8px 15px;">Clear All Logs</button>
+            </div>
+            <div id="logsContainer" class="logs-terminal">
+                <!-- Logs injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="strategy_Dashboard_Script.js"></script>
+</body>
+</html>
